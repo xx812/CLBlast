@@ -11,6 +11,14 @@
 
 cmake_minimum_required(VERSION 2.8.11)
 
+set(CMAKE_ANDROID_NDK "/home/skyrim/GitProjects/Github/android-ndk-r13b")
+set(CMAKE_ANDROID_STL_TYPE gnustl_static)
+set(OPENCL_ROOT "/home/skyrim/GitProjects/Github/OpenCL")
+
+message("CMAKE_ANDROID_NDK is ${CMAKE_ANDROID_NDK}")
+message("CMAKE_ANDROID_STL_TYPE is ${CMAKE_ANDROID_STL_TYPE}")
+message("OPENCL_ROOT is ${OPENCL_ROOT}")
+
 # Overrides for MSVC static runtime
 option(OVERRIDE_MSVC_FLAGS_TO_MT "Override compiler flags for MSVC to build with a static runtime (/MT instead of /MD)" ON)
 if(OVERRIDE_MSVC_FLAGS_TO_MT)
@@ -155,6 +163,11 @@ else()
   set(CFLAGS "-O2 -std=c99")
 endif()
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${CFLAGS}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=armv8-a -fPIE -pie -Wno-strict-aliasing")
+set(CMAKE_C_COMPILER aarch64-linux-android-gcc)
+set(CMAKE_CXX_COMPILER aarch64-linux-android-g++)
+
+
 
 # ==================================================================================================
 
